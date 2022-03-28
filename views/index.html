@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>表单上传用户输入</h1>
+    <form action="http://localhost:8080/form" method="post" enctype="multipart/form-data">
+      username: <input type="text" name="username" /> id: <input type="text" name="id" />
+      <input type="submit" value="提交" />
+    </form>
+    <hr />
+
+    <!-- ---------------------------------------------------------------- -->
+    <h1 style="margin-top: 100px">axios发送带查询参数的请求</h1>
+    username: <input type="text" id="username" /> id: <input type="text" id="id" />
+    <div onclick="axiosFun()">发送axios请求</div>
+    <hr />
+
+    <!-- ----------------------------------------- -->
+    <h1 style="margin-top: 100px">上传文件</h1>
+    <form action="http://localhost:8080/file" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" id="file" />
+      <input type="submit" value="提交" />
+    </form>
+    <hr />
+    <script>
+      function axiosFun() {
+        let username = document.getElementById("username").value;
+        let id = document.getElementById("id").value;
+        axios({
+          method: "post",
+          url: "http://localhost:8080/axios",
+          params: {
+            // params格式的参数会被拼接到请求的url中
+            // 等价于url: http://localhost:8080/axios?username=xxxx&id=xxxxx"
+            username,
+            id,
+          }, // query参数会显示在url中
+        }).then((res) => {
+          let { data } = res;
+          console.log("返回的结果", data);
+        });
+      }
+    </script>
+  </body>
+</html>
