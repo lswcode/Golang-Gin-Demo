@@ -36,8 +36,13 @@ func FormController(ctx *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	// ShouldBindWith  在第二个参数中可以指定要绑定的类型(binding.Form只绑定form，binding.JSON只绑定JSON数据)
-	// ShouldBindQuery  只绑定查询参数而忽略post参数
+	// 1  ShouldBind
+	// 2  ShouldBindWith  在第二个参数中可以指定要绑定的类型(binding.Form只绑定form，binding.JSON只绑定JSON数据)
+	// 3  ShouldBindQuery  只绑定查询参数而忽略post参数
+	// 4  Mustbind和ShouldBind区别:
+	// 当绑定发生错误，也就是获取数据失败时，Mustbind会自动处理错误，返回400状态码
+	// ShouldBind: 只会返回错误，由开发者自行处理错误和请求
+	// 5  Bind，BindJSON，BindXML，BindQuery，BindYAML，这几个属于MustBind的具体调用，就是少了Should的就属于Must bind
 	// -------------------------------------------------
 	// 返回JSON字符串给前端
 	data := map[string]interface{}{

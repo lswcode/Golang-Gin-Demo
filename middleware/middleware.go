@@ -12,8 +12,8 @@ func M1(ctx *gin.Context) {
 	fmt.Println("全局中间件11111开始") // Next之前的代码是中间件对目标的操作
 	startTime := time.Now()
 	// request请求被路由接收前
-	ctx.Next()
-	// 如果没有其它中间件了，表示对请求的预处理已经完成，请求被对应的路由以及控制器接收处理
+	ctx.Next() // Next函数执行后，请求进入下一个中间件，如果没有其它中间件了，表示对请求的预处理已经完成，请求被对应的路由以及控制器接收处理
+	// 此时请求已经被路由接收，并被控制器处理完成
 	timeUse := time.Since(startTime)
 	fmt.Println("全局中间件11111结束--耗费时间: ", timeUse) // 此时请求已经执行完成
 }
